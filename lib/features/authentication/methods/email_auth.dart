@@ -7,6 +7,7 @@ import '../../Home/home.dart';
 
 final _auth = FirebaseAuth.instance;
 
+// Method to sign in wiht email and password
 Future<void> signInWithEmail(
     BuildContext context, String email, String password) async {
   try {
@@ -29,12 +30,14 @@ Future<void> signInWithEmail(
   }
 }
 
+// Method to create new user using emial and password
 Future<void> signUpWithEmail(
     BuildContext context, String email, String password, String name) async {
   try {
     final userCresentails = await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
 
+    // Storing new user's data to firebase
     if (userCresentails.user != null) {
       await FirebaseFirestore.instance
           .collection('user')

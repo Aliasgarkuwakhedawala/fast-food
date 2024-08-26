@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+// This is the separate widget to pick image
+
 class ImagePickerWidget extends StatefulWidget {
   const ImagePickerWidget({super.key, required this.onPickImage});
   final void Function(File image) onPickImage;

@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: [
               SizedBox(
@@ -53,6 +53,7 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
+              // Using the custom text field
               CustomTextField(
                 controller: emailController,
                 hint: 'Your Email',
@@ -103,6 +104,7 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
+              // Created a widget custom button to reduce redudancy
               CustomButton(
                   onPressed: () {
                     signInWithEmail(
@@ -136,10 +138,8 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
+              // Created a custom widget for footer section for login and signup
               const Footer(),
-              // const Spacer(
-              //   flex: 1,
-              // ),
             ],
           ),
         ),

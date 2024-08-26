@@ -14,6 +14,7 @@ class SignUpScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
 
+  //  Function to verify email
   bool isValidEmail() {
     return RegExp(
             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
@@ -99,6 +100,7 @@ class SignUpScreen extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
+              // Created a custom password field for Login and signup
               PasswordTextField(
                 controller: passController,
                 hint: 'Enter Password',
@@ -180,10 +182,10 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Footer(),
+              const Footer(),
             ],
           ),
         ),

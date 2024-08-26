@@ -48,8 +48,10 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                       ),
                     ),
                     CircleAvatar(
-                      foregroundImage: NetworkImage(widget.item['image']),
-                      radius: 100,
+                      foregroundImage: NetworkImage(
+                        widget.item['image'],
+                      ),
+                      radius: 150,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -264,7 +266,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                   Checkbox(
                       checkColor: Colors.deepOrange,
                       activeColor: Colors.deepOrange,
-                      shape: CircleBorder(
+                      shape: const CircleBorder(
                           side: BorderSide(color: Colors.deepOrange)),
                       value: package,
                       onChanged: (bool) {

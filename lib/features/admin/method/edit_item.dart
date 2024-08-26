@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+// FUction to edit the item in firebase
+
 Future<void> editItem(
   BuildContext context,
   String id,

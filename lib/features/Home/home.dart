@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String deliveryLoc = "Location";
   bool isLoading = true;
   late List<dynamic> items;
+  late List<dynamic> fastest;
 
   @override
   void initState() {
@@ -29,11 +30,19 @@ class _HomeScreenState extends State<HomeScreen> {
     getData();
   }
 
+  // Funtion to fetch the data
   Future<void> getData() async {
     setState(() {
       isLoading = true;
     });
     items = await getItems();
+    fastest = items.map((e) => e).toList();
+    // Sorting to get the fastest items
+    fastest.sort(
+      (a, b) => a['time'].compareTo(
+        b['time'],
+      ),
+    );
     setState(() {
       isLoading = false;
     });
@@ -42,6 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    // If it is sitll fetching the data then showing indicator else showing the content
 
     return isLoading
         ? const Scaffold(
@@ -53,161 +64,174 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           )
         : Scaffold(
-            body: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 18,
-                        backgroundColor:
-                            primary_color, // Change primary color here
-                        child: SvgPicture.asset(
-                          "assets/home.svg",
-                          width: 18,
-                          color: Colors.white,
+            body: SingleChildScrollView(
+              child: Container(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 18,
+                          backgroundColor:
+                              primary_color, // Change primary color here
+                          child: SvgPicture.asset(
+                            "assets/home.svg",
+                            width: 18,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        "Home, ",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
+                        const SizedBox(width: 8),
+                        const Text(
+                          "Home, ",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Text(
-                        deliveryLoc,
-                        style: const TextStyle(color: Colors.black),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.asset(
-                          "assets/arrow-bottom.svg",
-                          width: 20,
-                          color: Colors.black,
+                        Text(
+                          deliveryLoc,
+                          style: const TextStyle(color: Colors.black),
                         ),
-                      ),
-                      Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AdminPanelScreen(),
-                            ),
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.admin_panel_settings,
-                              color: Colors.deepOrange,
-                            ),
-                            Text('Admin'),
-                          ],
+                        IconButton(
+                          onPressed: () {},
+                          icon: SvgPicture.asset(
+                            "assets/arrow-bottom.svg",
+                            width: 20,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  SingleChildScrollView(
-                    child: CarouselSlider(
-                      items: [
-                        carouselItem(size, 'Image-10.png'),
-                        carouselItem(size, 'landing_page_image.png'),
-                        carouselItem(size, 'Image-5.png'),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => AdminPanelScreen(),
+                              ),
+                            );
+                          },
+                          child: const Column(
+                            children: [
+                              Icon(
+                                Icons.admin_panel_settings,
+                                color: Colors.deepOrange,
+                              ),
+                              Text('Admin'),
+                            ],
+                          ),
+                        ),
                       ],
-                      options: CarouselOptions(
-                        autoPlay: true,
-                        initialPage: 0,
-                        autoPlayAnimationDuration: const Duration(seconds: 2),
-                        viewportFraction:
-                            1.0, // Ensures each item covers the full width
-                        enlargeCenterPage: false, // Keeps items the same size
-                      ),
                     ),
-                  ),
-                  Gap(20),
-                  Row(
-                    children: [
-                      Text(
-                        "Fastest Delivery🔥",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                      Spacer(),
-                      SizedBox(
-                        height: 24,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: secondary_color,
-                            padding: EdgeInsets.all(0),
-                          ),
-                          child: Text(
-                            "See all",
-                            style:
-                                TextStyle(fontSize: 10, color: primary_color),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Gap(15),
-                  SizedBox(
-                    height: 180,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: items.length,
-                      itemBuilder: (context, index) => listTile(index),
-                    ),
-                  ),
-                  Gap(15),
-                  Row(
-                    children: [
-                      Text(
-                        "Popular Items🔥",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                      Spacer(),
-                      SizedBox(
-                        height: 24,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: secondary_color,
-                            padding: EdgeInsets.all(0),
-                          ),
-                          child: Text(
-                            "See all",
-                            style:
-                                TextStyle(fontSize: 10, color: primary_color),
-                          ),
+                    const SizedBox(height: 20),
+                    SingleChildScrollView(
+                      // for the corousel created separate widget in the same file to save time
+                      child: CarouselSlider(
+                        items: [
+                          carouselItem(size, 'Image-10.png'),
+                          carouselItem(size, 'landing_page_image.png'),
+                          carouselItem(size, 'Image-5.png'),
+                        ],
+                        options: CarouselOptions(
+                          autoPlay: true,
+                          initialPage: 0,
+                          autoPlayAnimationDuration: const Duration(seconds: 2),
+                          viewportFraction:
+                              1.0, // Ensures each item covers the full width
+                          enlargeCenterPage: false, // Keeps items the same size
                         ),
                       ),
-                    ],
-                  ),
-                  Gap(15),
-                  SizedBox(
-                    height: 180,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 5,
-                      itemBuilder: (context, index) => listTile(index),
                     ),
-                  ),
-                ],
+                    Gap(20),
+                    Row(
+                      children: [
+                        const Text(
+                          "Fastest Delivery🔥",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          height: 24,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: secondary_color,
+                              padding: const EdgeInsets.all(0),
+                            ),
+                            child: Text(
+                              "See all",
+                              style:
+                                  TextStyle(fontSize: 10, color: primary_color),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Gap(15),
+                    SizedBox(
+                      height: 180,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: fastest.length,
+                        itemBuilder: (context, index) =>
+                            listTile(index, fastest),
+                      ),
+                    ),
+                    Gap(15),
+                    Row(
+                      children: [
+                        const Text(
+                          "Popular Items🔥",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          height: 24,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: secondary_color,
+                              padding: EdgeInsets.all(0),
+                            ),
+                            child: Text(
+                              "See all",
+                              style:
+                                  TextStyle(fontSize: 10, color: primary_color),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Gap(15),
+                    SizedBox(
+                      height: 180,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 5,
+                        itemBuilder: (context, index) => listTile(index, items),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             bottomNavigationBar: CustomBottomNavigationBar(
               currentIndex: _currentIndex,
               onTap: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
+                if (index != 0) {
+                  ScaffoldMessenger.of(context).clearSnackBars();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.deepOrange[700],
+                      content: const Center(
+                          child:
+                              Text("Oh uh!! For that you have to hire me 😊")),
+                    ),
+                  );
+                }
               },
               selectedItemColor: primary_color, // Change primary color here
               unselectedItemColor: Colors.black,
@@ -264,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Container(
                   width: 180,
                   child: Image.asset(
@@ -278,7 +302,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget listTile(int index) {
+  // This is a list widget for item using in fastest delivery and popular item section to render the items
+  Widget listTile(int index, List<dynamic> items) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
@@ -288,13 +313,13 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         width: 320,
         height: 200,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(blurRadius: 2, color: Color.fromRGBO(98, 98, 98, 0.2))
             ]),
         child: Column(

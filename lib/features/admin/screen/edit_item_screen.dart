@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 import '../method/add_item.dart';
 
+// very similar to add item screen just getting the item from prev screen and having some less validation
+
 class EditItemScreen extends StatelessWidget {
   const EditItemScreen({super.key, required this.item});
   final dynamic item;

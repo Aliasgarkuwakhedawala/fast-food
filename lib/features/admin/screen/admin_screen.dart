@@ -29,6 +29,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
     get();
   }
 
+  // fetching items from sb on screen building
   Future<void> get() async {
     print('going to ');
     setState(() {
@@ -44,6 +45,8 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
+    // if its fetching the data then showing the progress indicator else showing the content
     return isLoading
         ? const Scaffold(
             backgroundColor: Colors.white,
@@ -88,12 +91,12 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                           ),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       GestureDetector(
                         onTap: () {
                           GoogleSignInAL().signOutGoogle(context);
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.logout,
                           color: Colors.deepOrange,
                         ),
@@ -110,6 +113,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                       style: TextStyle(fontSize: 20),
                     ),
                   ),
+                  // created separate card to display each item then displaying it
                   Expanded(
                     child: ListView.builder(
                       itemCount: items.length,

@@ -5,6 +5,8 @@ import 'package:fast_food/models/models.dart';
 
 import '../../Home/home.dart';
 
+// Mehtod to signin user using facebook login
+
 Future<UserCredential> SignInWithFacebook(BuildContext context) async {
   try {
     final LoginResult loginResult = await FacebookAuth.instance.login();

@@ -5,6 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../Home/home.dart';
 
+// Method to signin user using Google login
+
 class GoogleSignInAL {
   FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -38,6 +40,7 @@ class GoogleSignInAL {
     }
   }
 
+  // Method to Log out from all form
   Future<bool> signOutGoogle(BuildContext context) async {
     try {
       await auth.signOut();

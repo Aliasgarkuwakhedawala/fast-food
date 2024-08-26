@@ -6,17 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 final uuid = Uuid();
-
+// function to store the data into firebase using uuid for unique id to each item
 Future<void> addItem(BuildContext context, String name, String desc,
     String price, String discount, String time, File image) async {
-  print('indside fun');
   try {
-    print('inside try');
-    print(name);
-    print(desc);
-    print(price);
-    print(discount);
-    print(image);
     final firebaseRef = await FirebaseStorage.instance
         .ref()
         .child('item_image')
@@ -33,6 +26,7 @@ Future<void> addItem(BuildContext context, String name, String desc,
       'time': time,
       'image': imageURL,
     });
+    // navigating back once data is uploaded
     Navigator.of(context).pop();
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(

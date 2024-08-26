@@ -46,7 +46,7 @@
     package="com.example.fast_food">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="login_flutter"
+        android:label="Fast Food"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

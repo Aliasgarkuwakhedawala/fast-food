@@ -51,6 +51,8 @@ class AddItemScreen extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
+
+              // created separated widget for text field because it is used many time in the app
               CustomTextField(
                   controller: nameController, hint: 'Enter Name of Item'),
               const SizedBox(
@@ -66,6 +68,8 @@ class AddItemScreen extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
+
+              // Not using custom text field because description may be of multiline
               TextField(
                 controller: descController,
                 maxLines: null,
@@ -104,6 +108,7 @@ class AddItemScreen extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
+              // Same for number
               TextField(
                 controller: priceController,
                 maxLines: 1,
@@ -230,6 +235,8 @@ class AddItemScreen extends StatelessWidget {
           ),
         ),
       ),
+
+      // Add new item buttoj as a floating action button
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -238,6 +245,8 @@ class AddItemScreen extends StatelessWidget {
           height: 40,
           child: FloatingActionButton(
             onPressed: () async {
+              //  using self validation
+
               if (nameController.text.isEmpty) {
                 ScaffoldMessenger.of(context).clearSnackBars();
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -277,6 +286,7 @@ class AddItemScreen extends StatelessWidget {
               if (discountController.text.isEmpty) {
                 discountController.text = '0';
               }
+              // if validated then upload it to db
               await addItem(
                   context,
                   nameController.text,
@@ -287,7 +297,7 @@ class AddItemScreen extends StatelessWidget {
                   _selectedImage);
             },
             backgroundColor: Colors.deepOrange,
-            child: Text(
+            child: const Text(
               'Submit',
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),

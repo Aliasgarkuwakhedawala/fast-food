@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+// FUnction to fetch all the items from the database
+
 Future<List<dynamic>> getItems() async {
   try {
     final firebase = FirebaseFirestore.instance;

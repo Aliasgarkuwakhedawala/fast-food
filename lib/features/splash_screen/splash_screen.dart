@@ -22,6 +22,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
+    // Duration to close splahs screen and stream builder to navigate accoding to auth state
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
@@ -45,6 +46,8 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      // container to show the gradient
+
       body: Container(
         height: double.infinity,
         width: double.infinity,
@@ -59,6 +62,7 @@ class _SplashScreenState extends State<SplashScreen>
             Color.fromARGB(255, 245, 60, 0)
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
+        //  Inside container a column used to show logo and text
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
