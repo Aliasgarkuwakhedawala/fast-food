@@ -1,10 +1,2 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="facebook_app_id">1176511920060077</string>
-    <string name="fb_login_protocol_scheme">fb1176511920060077</string>
-    <string name="facebook_client_token">0edcd9877d5acc757f5194e6a7d517bd</string>
-    <string name="app_name">"fast_food"</string>
-
-</resources>
 
 
